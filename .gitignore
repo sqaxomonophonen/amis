@@ -1,0 +1,4 @@
+*.o
+*.adf
+roms/*.rom
+.*swp
