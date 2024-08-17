@@ -5,3 +5,4 @@ if [ -z "$1" ] ; then
 	exit 1
 fi
 fs-uae --warp-mode=1 --keyboard-input-grab=0 --window-resizable=1 --kickstart-file=./roms/kickstart13.rom --floppy-drive-0=$1.adf
+#fs-uae --keyboard-input-grab=0 --window-resizable=1 --kickstart-file=./roms/kickstart13.rom --floppy-drive-0=$1.adf
