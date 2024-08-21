@@ -14,10 +14,10 @@ init:
         tst.l	d0
 	beq.s	err_exit
 
-	moveq	#1,d0
+	move	#16,d0
 	bsr	pwm
 
-ALEN = 32
+ALEN = 512
 
 ; play waveform
 play:
@@ -29,11 +29,10 @@ play:
 .audDMACON = -10
 	lea	.AUD0,a1
 	move.l	a0,.audLCH(a1)
-	move.w	#ALEN/2,.audLEN(a1)
+	move.w	#ALEN/2,.audLEN(a1) ; number of words, not bytes
 	move.w	#123,.audPER(a1)
 	move.w	#64,.audVOL(a1)
 	move.w	#$8001,.audDMACON(a1)
-	
 
 ; TODO arp?
 
@@ -54,7 +53,8 @@ exit:
 
 pwm: ; d0=width, a0=dstptr, destroys d0-d2/a1
 	move.l	a0,a1
-	moveq	#ALEN-1,d2 ; samples per period - 1
+	;moveq	#ALEN-1,d2 ; samples per period - 1
+	move 	#ALEN-1,d2 ; samples per period - 1
 	moveq	#$7f,d1
 .loop:
 	subq	#1,d0
